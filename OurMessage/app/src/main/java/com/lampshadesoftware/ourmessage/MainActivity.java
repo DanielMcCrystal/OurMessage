@@ -43,21 +43,6 @@ public class MainActivity extends AppCompatActivity {
 		connectThread.start();
 		try { connectThread.join(); } catch(Exception e) {}
 
-		Thread checkForReply = new Thread() {
-			public void run() {
-				while (true) {
-					String currentMessage = receivedMessage.getText().toString();
-					String newMessage = ch.executeCommand("cat ~/Scripts/messages.txt");
-					if (!newMessage.equals(currentMessage)) {
-						receivedMessage.setText(newMessage);
-					}
-					try {Thread.sleep(10); } catch(Exception e){}
-				}
-			}
-		};
-
-		checkForReply.start();
-
 	}
 
 	@Override
@@ -72,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 		Thread executeThread = new Thread() {
 			public void run() {
 				String message = messageBar.getText().toString();
-				String command = "osascript ~/Scripts/sendMessage.scpt \"" + message + "\" \"" + "+15713147826" + "\"";
+				String command = "osascript ~/Scripts/sendMessage.scpt \"" + message + "\" \"" + "+14345668824" + "\"";
 				ch.executeCommand(command);
 
 			}
