@@ -25,7 +25,7 @@ public class ConnectionHandler {
 		System.out.println("here I am");
 		try  {
 			JSch jsch = new JSch();
-			session = jsch.getSession("danielmccrystal","192.168.1.15", 22);
+			session = jsch.getSession("danielmccrystal","10.0.0.93", 22);
 			session.setPassword("1212");
 
 			// Avoid asking for key confirmation

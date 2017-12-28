@@ -1,10 +1,13 @@
 package com.lampshadesoftware.ourmessage;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,22 +19,22 @@ public class MessageAdapter extends BaseAdapter {
 
 	private Context context;
 	private LayoutInflater inflater;
-	private ArrayList<Message> messages;
+	private Conversation conversation;
 
-	public MessageAdapter(Context context, ArrayList<Message> messages) {
+	public MessageAdapter(Context context, Conversation conversation) {
 		this.context = context;
-		this.messages = messages;
+		this.conversation = conversation;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
 	public int getCount() {
-		return messages.size();
+		return conversation.getNumMessages();
 	}
 
 	@Override
 	public Object getItem(int i) {
-		return messages.get(i);
+		return conversation.getMessage(i);
 	}
 
 	@Override
@@ -41,6 +44,19 @@ public class MessageAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int i, View view, ViewGroup viewGroup) {
-		return null;
+		View rowView = inflater.inflate(R.layout.list_item_message, viewGroup, false);
+		TextView messageContent = rowView.findViewById(R.id.messageContent);
+		Message m = (Message) getItem(i);
+		messageContent.setText(m.getContent());
+		if (m.getSelfBool()) {
+			rowView.setBackgroundColor(Color.BLUE);
+			messageContent.setTextColor(Color.WHITE);
+			messageContent.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+		} else {
+			rowView.setBackgroundColor(Color.GRAY);
+			messageContent.setTextColor(Color.BLACK);
+			messageContent.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+		}
+		return rowView;
 	}
 }

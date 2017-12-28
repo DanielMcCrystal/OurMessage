@@ -16,13 +16,21 @@ public class Message {
 	public Message(String content) {
 		this(content, "Me", true);
 	}
-	public Message(String sender, String content) {
-		this(sender, content, false);
+	public Message(String content, String sender) {
+		this(content, sender, false);
 	}
 
 	private Message(String content, String sender, boolean self) {
 		this.sender = sender;
 		this.content = content;
 		this.self = self;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public boolean getSelfBool() {
+		return self;
 	}
 }

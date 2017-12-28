@@ -8,7 +8,7 @@
 
     <ListView
         android:id="@+id/conversationListView"
-        android:layout_width="385dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/inputEditText"
@@ -35,6 +35,7 @@
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="SEND"
+        android:onClick="sendButtonPressed"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="@+id/inputEditText"
         app:layout_constraintRight_toRightOf="parent" />
