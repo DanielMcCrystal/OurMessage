@@ -12,25 +12,38 @@ import java.util.List;
 public class MessagesHandler {
 
 	private ConnectionHandler ch;
+	public ConnectionHandler getConnectionHandler() {
+		return ch;
+	}
 	private String service;
 	private LinkedList<Conversation> conversations;
 
 	public MessagesHandler() {
-		//ch = new ConnectionHandler();
+		ch = new ConnectionHandler();
 		service = "E:kayakoo@aol.com";
 		conversations = new LinkedList<Conversation>();
 	}
 
-	public void startNewConverstaion(String buddy) {
-		conversations.add(new Conversation(buddy));
+	public void startNewConverstaion(String address) {
+		conversations.add(new Conversation(address, this));
 	}
-	public void sendMessage(String recipient, String message) {
 
-	}
 
 	public void updateConversations() {
 
 	}
+
+	public Conversation getConversation(String address) {
+		for(Conversation c: conversations) {
+			if (c.getAddress().equals(address)) {
+				System.out.println("Returning conversation with address: " + address);
+				return c;
+			}
+		}
+		System.out.println("No existing conversation with address: " + address);
+		return null;
+	}
+
 }
 
 

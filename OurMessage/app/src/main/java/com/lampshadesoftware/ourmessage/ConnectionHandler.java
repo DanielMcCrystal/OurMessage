@@ -22,7 +22,6 @@ public class ConnectionHandler {
 	private Channel channel;
 
 	public ConnectionHandler() {
-		System.out.println("here I am");
 		try  {
 			JSch jsch = new JSch();
 			session = jsch.getSession("danielmccrystal","10.0.0.93", 22);
@@ -59,13 +58,13 @@ public class ConnectionHandler {
 	}
 
 	public String executeCommand(String command) {
-		String output = "failed";
+		String output = "_*_*_*";
 		try {
 
 			ChannelExec ce = (ChannelExec) getChannel();
 			ce.setCommand(command);
 			channel.setInputStream(null);
-			((ChannelExec)channel).setErrStream(System.err);
+			//((ChannelExec)channel).setErrStream(System.err);
 			InputStream in = channel.getInputStream();
 			ce.connect();
 
@@ -81,7 +80,7 @@ public class ConnectionHandler {
 					//System.out.println("exit-status: "+channel.getExitStatus());
 					break;
 				}
-				try{Thread.sleep(1000);}catch(Exception ee){}
+				try{Thread.sleep(10);}catch(Exception ee){}
 			}
 			ce.disconnect();
 		}

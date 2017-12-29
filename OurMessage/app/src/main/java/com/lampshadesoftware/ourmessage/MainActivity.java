@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 		Thread executeThread = new Thread() {
 			public void run() {
 				String message = messageBar.getText().toString();
-				String command = "osascript ~/Scripts/sendMessage.scpt \"" + message + "\" \"" + "+13053234079" + "\"";
+				String command = "osascript ~/OurMessage/sendMessage.scpt \"" + message + "\" \"" + "+13053234079" + "\"";
 				ch.executeCommand(command);
 
 			}

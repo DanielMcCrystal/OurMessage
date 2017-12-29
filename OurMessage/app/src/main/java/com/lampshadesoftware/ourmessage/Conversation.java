@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Conversation {
 	protected MessagesHandler mh;
-	private String id;
-	public String getID() {
-		return id;
+	private String address;
+	public String getAddress() {
+		return address;
 	}
 
 	private ArrayList<Message> messages;
@@ -19,16 +19,20 @@ public class Conversation {
 		return messages;
 	}
 
-	public Conversation(String buddy) {
-		this.id = buddy;
+	public Conversation(String address, MessagesHandler mh) {
+		this.address = address;
+		this.mh = mh;
 		messages = new ArrayList<Message>();
+
 	}
 
 	public void sendMessage(String message) {
 		messages.add(new Message(message));
+		mh.getConnectionHandler().executeCommand("osascript ~/OurMessage/sendMessage.scpt \"" +
+				message + "\" \"" + address + "\"");
 	}
 
-	public void addFillerMessage(String message) {
+	public void addReceivedMessage(String message) {
 		messages.add(new Message(message, "John Doe"));
 	}
 
@@ -37,5 +41,21 @@ public class Conversation {
 	}
 	public Message getMessage(int i) {
 		return messages.get(i);
+	}
+
+	public boolean pullMessages() {
+		String stream = mh.getConnectionHandler().executeCommand("cat ~/OurMessage/messages/" + address);
+		if (stream.equals("_*_*_*")) {
+			return false;
+		}
+		String[] newMessages = stream.split("\\R");
+		if (newMessages.length > 0) {
+			for (String s: newMessages) {
+				addReceivedMessage(s);
+			}
+			mh.getConnectionHandler().executeCommand("rm ~/OurMessage/messages/" + address);
+			return true;
+		}
+		return false;
 	}
 }

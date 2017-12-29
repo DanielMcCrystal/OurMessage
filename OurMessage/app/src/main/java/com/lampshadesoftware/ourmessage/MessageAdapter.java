@@ -2,6 +2,7 @@ package com.lampshadesoftware.ourmessage;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,11 @@ public class MessageAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return conversation.getNumMessages();
+		if (conversation != null) {
+			return conversation.getNumMessages();
+		}
+
+		return 0;
 	}
 
 	@Override
