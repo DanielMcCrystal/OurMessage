@@ -24,13 +24,15 @@ public class MessagesHandler {
 		conversations = new LinkedList<Conversation>();
 	}
 
-	public void startNewConverstaion(String address) {
+	public void startNewConversation(String address) {
 		conversations.add(new Conversation(address, this));
 	}
 
 
 	public void updateConversations() {
-
+		for(Conversation c: conversations) {
+			c.pullMessages();
+		}
 	}
 
 	public Conversation getConversation(String address) {

@@ -44,7 +44,7 @@ public class ConversationActivity extends AppCompatActivity {
 		Thread t = new Thread() {
 			public void run() {
 				mh = new MessagesHandler();
-				mh.startNewConverstaion(address);
+				mh.startNewConversation(address);
 				convo = mh.getConversation(address);
 				ready = true;
 				adapter = new MessageAdapter(context, convo);
